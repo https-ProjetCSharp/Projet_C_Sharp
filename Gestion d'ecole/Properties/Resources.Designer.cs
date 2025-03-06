@@ -63,6 +63,16 @@ namespace Gestion_d_ecole.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _9187604 {
+            get {
+                object obj = ResourceManager.GetObject("9187604", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ajouter_un_utilisateur {
             get {
                 object obj = ResourceManager.GetObject("ajouter-un-utilisateur", resourceCulture);
@@ -76,6 +86,16 @@ namespace Gestion_d_ecole.Properties {
         internal static System.Drawing.Bitmap icons8_prof_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-prof-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kaay_JANG_SCHOOL {
+            get {
+                object obj = ResourceManager.GetObject("Kaay_JANG_SCHOOL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
