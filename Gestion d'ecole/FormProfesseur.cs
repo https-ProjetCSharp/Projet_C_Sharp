@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gestion_d_ecole
@@ -29,7 +26,7 @@ namespace Gestion_d_ecole
             {
                 dataGridView1.DataSource = db.Professeurs.Select(c => new { c.Id, c.Nom, c.Prenom, c.Email, c.Telephone }).ToList();
             }
-            
+
             btnajouterprof.Enabled = true;
             btneffacerprof.Enabled = true;
             btnsupprimerprof.Enabled = false;
@@ -72,10 +69,10 @@ namespace Gestion_d_ecole
                     txtprofchoisi.Text = row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString();
                     refreshclassma();
                     RefreshClasseProf();
-                   /* if (comboclassassoc.Items.Count > 0)
-                    {
-                        refreshmatieres((int)comboclassassoc.SelectedValue);
-                    }*/
+                    /* if (comboclassassoc.Items.Count > 0)
+                     {
+                         refreshmatieres((int)comboclassassoc.SelectedValue);
+                     }*/
                 }
             }
         }
@@ -151,7 +148,8 @@ namespace Gestion_d_ecole
                         comboclassassoc.DisplayMember = "NomClasse"; // Assurez-vous que cette propriété existe
                         comboclassassoc.ValueMember = "Id";
                     }
-                    else { 
+                    else
+                    {
                         comboclassassoc.DataSource = null;
                     }
                 }
@@ -165,7 +163,7 @@ namespace Gestion_d_ecole
 
                 using (var db = new DB())
                 {
-                   
+
                     Professeur professeur = db.Professeurs
                         .Include("ProfesseursMatieres.Matiere") // Inclure les professeurs liés via la table de liaison
                         .FirstOrDefault(c => c.Id == idProfesseur);
@@ -202,7 +200,8 @@ namespace Gestion_d_ecole
                 Professeur prof = db.Professeurs.Find(profid);
                 if (prof != null)
                 {
-                    if (verif_relation_prof_classe(profid) == 0) {
+                    if (verif_relation_prof_classe(profid) == 0)
+                    {
                         db.Professeurs.Remove(prof);
                         db.SaveChanges();
                         MessageBox.Show(" Professeur effacée");
@@ -221,7 +220,7 @@ namespace Gestion_d_ecole
             int x = 0;
             using (var db = new DB())
             {
-                x = db.ProfesseursClasses.Where(c=> c.IdProfesseur==idprof).Count();
+                x = db.ProfesseursClasses.Where(c => c.IdProfesseur == idprof).Count();
             }
             return x;
         }
@@ -606,7 +605,7 @@ namespace Gestion_d_ecole
 
         private void comboclassassoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
 
         }
 

@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gestion_d_ecole
@@ -41,18 +38,18 @@ namespace Gestion_d_ecole
                     Adresse = p.Adresse,
                     Classe = p.Classe.NomClasse
 
-               }).ToList();
+                }).ToList();
 
             }
-            
+
             effacer();
             btnetudiantajouter.Enabled = true;
-           
+
         }
 
         private void refreshdate()
         {
-            txtetudiantdatenais.MinDate = new DateTime(1990, 1, 1); 
+            txtetudiantdatenais.MinDate = new DateTime(1990, 1, 1);
             txtetudiantdatenais.MaxDate = new DateTime(2020, 12, 31);
         }
         private void refreshclasse()
@@ -132,7 +129,7 @@ namespace Gestion_d_ecole
 
         private void btnetudiantajouter_Click(object sender, EventArgs e)
         {
-            if (txtetudiantadresse.Text.Length>0 && txtetudiantnom.Text.Length>0
+            if (txtetudiantadresse.Text.Length > 0 && txtetudiantnom.Text.Length > 0
                 && txtetudiantprenom.Text.Length > 0 && txtetudianttelephone.Text.Length > 0
                 && txtetudiantemail.Text.Length > 0)
             {
@@ -144,7 +141,7 @@ namespace Gestion_d_ecole
                 etudiant.DateNaissance = txtetudiantdatenais.Value;
                 etudiant.Classe = (Classe)txtetudiantclasse.SelectedItem;
                 etudiant.Telephone = txtetudianttelephone.Text; etudiant.Email = txtetudiantemail.Text;
-                etudiant.Matricule = getlastid()+txtetudianttelephone.Text.Substring(0, 2)+txtetudiantnom.Text.Substring(0, 2);
+                etudiant.Matricule = getlastid() + txtetudianttelephone.Text.Substring(0, 2) + txtetudiantnom.Text.Substring(0, 2);
                 using (var db = new DB())
                 {
                     db.Etudiants.Add(etudiant);
@@ -154,9 +151,10 @@ namespace Gestion_d_ecole
                     refresh();
 
                 }
-            } else
+            }
+            else
             {
-                 MessageBox.Show("veuiller remplir toutes les cellules");
+                MessageBox.Show("veuiller remplir toutes les cellules");
             }
         }
 
@@ -222,7 +220,7 @@ namespace Gestion_d_ecole
 
         private void txtetudianttelephone_Validating(object sender, CancelEventArgs e)
         {
-            if (verif_numero(txtetudianttelephone.Text) == 1 )
+            if (verif_numero(txtetudianttelephone.Text) == 1)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtetudianttelephone, "numero non valide");
@@ -247,7 +245,7 @@ namespace Gestion_d_ecole
             if (!Regex.IsMatch(txtetudiantemail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtetudiantemail,"email non valide");
+                errorProvider1.SetError(txtetudiantemail, "email non valide");
             }
             else
             {
@@ -263,10 +261,11 @@ namespace Gestion_d_ecole
                 }
             }
         }
-        List<string> mes_sexe = new List<string> { "masculin", "feminin"};
+        List<string> mes_sexe = new List<string> { "masculin", "feminin" };
         List<string> mes_classes;
 
-        public void recharge() {
+        public void recharge()
+        {
             using (var db = new DB())
             {
                 mes_classes = db.Classes.Select(c => c.NomClasse).ToList(); // Sélectionnez directement la propriété
@@ -276,9 +275,9 @@ namespace Gestion_d_ecole
 
 
 
-private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtetudiantsexe_Validating(object sender, CancelEventArgs e)
@@ -286,7 +285,7 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
             if (mes_sexe.Contains(txtetudiantsexe.Text) == false)
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtetudiantsexe,"vous devez choisir parmi la liste deroulante");
+                errorProvider1.SetError(txtetudiantsexe, "vous devez choisir parmi la liste deroulante");
             }
             else
             {
@@ -320,7 +319,7 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
             using (var db = new DB())
             {
                 var dernierId = db.Etudiants
-                                  .OrderByDescending(e => e.Id).Select(e => e.Id) 
+                                  .OrderByDescending(e => e.Id).Select(e => e.Id)
                                   .FirstOrDefault();
 
                 return dernierId; // Retourner le dernier ID
@@ -329,10 +328,10 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
 
         private void txtetudiantsexe_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled= true;
+            e.Handled = true;
         }
 
-       
+
         private void txtetudiantrecherch_TextChanged(object sender, EventArgs e)
         {
             if (txtetudiantrecherch.Text.Length > 0)
@@ -414,7 +413,7 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
         }
         private void txtetudianttyperecherch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true ;
+            e.Handled = true;
         }
 
         private void btnfiltrer_Click(object sender, EventArgs e)
@@ -448,7 +447,7 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
 
         private void txtetudianttyperecherch_TextUpdate(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtetudianttyperecherch_SelectedIndexChanged(object sender, EventArgs e)
@@ -470,7 +469,7 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
                 && txtetudiantprenom.Text.Length > 0 && txtetudianttelephone.Text.Length > 0
                 && txtetudiantemail.Text.Length > 0)
                     {
-                        
+
                         etudiant.Nom = txtetudiantnom.Text;
                         etudiant.Prenom = txtetudiantprenom.Text;
                         etudiant.Adresse = txtetudiantadresse.Text;
@@ -482,8 +481,8 @@ private void txtetudiantsexe_SelectedIndexChanged(object sender, EventArgs e)
                         etudiant.Matricule = etudiantId + txtetudianttelephone.Text.Substring(0, 2) + txtetudiantnom.Text.Substring(0, 2);
 
                         db.SaveChanges();
-                    MessageBox.Show(" Etudiant Modifiée");
-                    refresh();
+                        MessageBox.Show(" Etudiant Modifiée");
+                        refresh();
                     }
                     else
                     {
