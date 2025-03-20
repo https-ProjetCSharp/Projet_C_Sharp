@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows.Forms;
 
 namespace Gestion_d_ecole
 {
@@ -34,9 +34,36 @@ namespace Gestion_d_ecole
         {
             using (var db = new DB())
             {
+                // Récupérer les valeurs des TextBox
+                string nomUtilisateur = txtNomUtilisateur.Text;
+                string motDePasse = txtPassword.Text.Trim(); ;
 
+                // Appeler la méthode d'authentification qui compare les mots de passe hachés
+                Utilisateur utilisateur = UtilisateurService.Authentifier(nomUtilisateur, motDePasse);
+
+                // Vérifier si l'utilisateur existe
+                if (utilisateur != null)
+                {
+                    // Si l'utilisateur est trouvé, afficher son rôle ou une autre action
+                    MessageBox.Show($"Bienvenue {utilisateur.NomUtilisateur}, vous êtes un {utilisateur.Role}");
+
+                    // Créer une instance de MainForm
+                    FormOTP formOTP = new FormOTP();
+
+                    // Afficher le formulaire MainForm
+                    formOTP.ShowDialog();
+
+                    // Fermer le formulaire de connexion (FormLogin)
+                    this.Hide(); // Utilise Hide() pour garder la possibilité de revenir si nécessaire
+                }
+                else
+                {
+                    // Si l'authentification échoue
+                    MessageBox.Show("Nom d'utilisateur ou mot de passe incorrect.");
+                }
             }
         }
+        
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {

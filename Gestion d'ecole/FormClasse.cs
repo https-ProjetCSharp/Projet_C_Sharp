@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gestion_d_ecole
@@ -111,7 +104,7 @@ namespace Gestion_d_ecole
             {
                 int classeId = (int)dataGridView1.CurrentRow.Cells[0].Value;
                 Classe classe = db.Classes.Find(classeId);
-                if (verifier_si_classe_a_des_eleves(classe.NomClasse) == 0) 
+                if (verifier_si_classe_a_des_eleves(classe.NomClasse) == 0)
                 {
                     if (classe != null)
                     {
@@ -135,7 +128,7 @@ namespace Gestion_d_ecole
                 }
 
             }
-                 
+
         }
         private int verif_relation_Classe(int classeid)
         {
@@ -152,9 +145,9 @@ namespace Gestion_d_ecole
             using (var db = new DB())
             {
                 var x = db.Etudiants
-                       .Where(c => c.Classe.NomClasse==nom)
+                       .Where(c => c.Classe.NomClasse == nom)
                        .FirstOrDefault();
-                return x != null ? 1 : 0; 
+                return x != null ? 1 : 0;
             }
         }
 
@@ -202,17 +195,17 @@ namespace Gestion_d_ecole
 
         private void txtclassenom_TextChanged(object sender, EventArgs e)
         {
- 
-                
-                if (txtclassenom.Text.Length > 0)
-                {
-                    btneffacer.Enabled = true;
-                }
-                else
-                {
-                    btneffacer.Enabled = false;
-                }
-            
+
+
+            if (txtclassenom.Text.Length > 0)
+            {
+                btneffacer.Enabled = true;
+            }
+            else
+            {
+                btneffacer.Enabled = false;
+            }
+
         }
 
         private void btnmodifier_Click(object sender, EventArgs e)
@@ -225,7 +218,7 @@ namespace Gestion_d_ecole
                 {
                     if (classe != null)
                     {
-                        if(txtclassenom.Text.Length >0)
+                        if (txtclassenom.Text.Length > 0)
                         {
                             classe.NomClasse = txtclassenom.Text;
                             db.SaveChanges();
@@ -237,9 +230,11 @@ namespace Gestion_d_ecole
                             MessageBox.Show(" Classe vide");
                         }
                     }
-                }else
-                 {
-                    if (txtclassenom.Text == classe.NomClasse) {
+                }
+                else
+                {
+                    if (txtclassenom.Text == classe.NomClasse)
+                    {
                         classe.NomClasse = txtclassenom.Text;
                         db.SaveChanges();
                         MessageBox.Show(" Classe Modifiée");
@@ -249,7 +244,7 @@ namespace Gestion_d_ecole
                     {
                         MessageBox.Show(" Classe deja existant");
                     }
-                 }
+                }
             }
         }
 
@@ -270,16 +265,16 @@ namespace Gestion_d_ecole
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-        recherch();
+            recherch();
         }
         void recherch()
         {
             using (var db = new DB())
             {
-            dataGridView1.DataSource = db.Classes
-                   .Where(c => c.NomClasse.Contains(txtrecherch.Text))
-                   .Select(c => new { c.Id, c.NomClasse })
-                    .ToList();
+                dataGridView1.DataSource = db.Classes
+                       .Where(c => c.NomClasse.Contains(txtrecherch.Text))
+                       .Select(c => new { c.Id, c.NomClasse })
+                        .ToList();
             }
         }
 

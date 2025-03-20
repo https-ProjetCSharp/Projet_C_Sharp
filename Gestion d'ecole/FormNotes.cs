@@ -248,5 +248,9 @@ namespace Gestion_d_ecole
            
             
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

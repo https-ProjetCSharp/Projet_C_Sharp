@@ -18,6 +18,7 @@ namespace Gestion_d_ecole
         private void FormEtudiant_Load(object sender, EventArgs e)
         {
             refresh();
+           // btnetudianteffacer.Enabled = true;
         }
         private void refresh()
         {
@@ -95,7 +96,7 @@ namespace Gestion_d_ecole
             refreshfiltre();
             refreshsexe();
             btnetudiantajouter.Enabled = false;
-            btnetudianteffacer.Enabled = false;
+            btnetudianteffacer.Enabled = true;
             btnetudiantmodifier.Enabled = false;
             btnetudiantsupprimer.Enabled = false;
         }
@@ -495,6 +496,17 @@ namespace Gestion_d_ecole
         private void txtfiltre_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void txtPrint_Click(object sender, EventArgs e)
+        {
+            FormRapportEtudiants formRapportEtudiants = new FormRapportEtudiants();
+            formRapportEtudiants.ShowDialog();
+        }
+
+        private void txtfiltre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         /*

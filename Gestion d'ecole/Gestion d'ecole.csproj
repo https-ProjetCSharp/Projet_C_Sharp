@@ -17,7 +17,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -39,6 +39,10 @@
     <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -58,9 +62,11 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,12 +78,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulletinScolaire.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulletinScolaire.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classe.cs" />
     <Compile Include="ClasseCours.cs" />
     <Compile Include="Cours.cs" />
     <Compile Include="CoursMatiere.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Etudiant.cs" />
+    <Compile Include="etudiants.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>etudiants.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormClasse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,11 +138,23 @@
     <Compile Include="FormNotes.Designer.cs">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOTP.Designer.cs">
+      <DependentUpon>FormOTP.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormProfesseur.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormProfesseur.Designer.cs">
       <DependentUpon>FormProfesseur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRapportEtudiants.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRapportEtudiants.Designer.cs">
+      <DependentUpon>FormRapportEtudiants.cs</DependentUpon>
     </Compile>
     <Compile Include="Matiere.cs" />
     <Compile Include="Migrations\202502262252036_creation_des_tables.cs" />
@@ -148,6 +178,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilisateur.cs" />
+    <Compile Include="UtilisateurService.cs" />
+    <EmbeddedResource Include="BulletinScolaire.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BulletinScolaire.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="etudiants.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>etudiants.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormClasse.resx">
       <DependentUpon>FormClasse.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,8 +208,14 @@
     <EmbeddedResource Include="FormNotes.resx">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormOTP.resx">
+      <DependentUpon>FormOTP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormProfesseur.resx">
       <DependentUpon>FormProfesseur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRapportEtudiants.resx">
+      <DependentUpon>FormRapportEtudiants.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202502262252036_creation_des_tables.resx">
       <DependentUpon>202502262252036_creation_des_tables.cs</DependentUpon>
@@ -225,6 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\9187604.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
